@@ -5,17 +5,11 @@ def Perceptron(data, output):
 	datafile = open(data)
 	outputfile = output
 
-        
 	x = []          #x values
-	
 	t = []          #target values 
-
-
 	
-        #Reading the data file
-	
-	i=0
-	
+        #Reading the data file	
+	i=0	
 	for line in datafile:
             
 		x.insert(i,line.split())
@@ -24,10 +18,8 @@ def Perceptron(data, output):
 			t.insert(i,1)
 		else:
 			t.insert(i,0)
-			
-		
-		x[i][0] = 1
-		
+					
+		x[i][0] = 1		
 		i=i+1
 		
 	rows = len(x)
@@ -47,12 +39,9 @@ def Perceptron(data, output):
 	errors = [0]*101
 	errors_annealing = [0]*101
 	
-	
-	for i in range(101):
-                
+	for i in range(101):              
                 
 		for row in range (rows):
-
 
 			#Classify
 
@@ -69,9 +58,6 @@ def Perceptron(data, output):
                                 o_annealing[row] = 1
                         else:
                                 o_annealing[row] = 0
-
-
-
 			
 			#Calculate delta w
 			
@@ -86,17 +72,14 @@ def Perceptron(data, output):
                                 
                                 delta_w_annealing[b] += (diff_annealing*x_value*rate_annealing)
                                                          
-
                         #Error Classification 
                         if (o[row] != t[row]):
                                 errors[i] = errors[i] + 1
                         if (o_annealing[row] != t[row]):
                                 errors_annealing[i] = errors_annealing[i] + 1
                         o[row] = 0
-                        o_annealing[row] = 0
-			
-                                                         
-               
+                        o_annealing[row] = 0			
+                                                                      
 		#Calculate w
                 
                 for c in range(columns):
@@ -104,13 +87,7 @@ def Perceptron(data, output):
                         delta_w[c] = 0
 		
                         w_annealing[c] = w_annealing[c] + delta_w_annealing[c]
-                        delta_w_annealing[c] = 0
-
-
-                
-
-        
-
+                        delta_w_annealing[c] = 0              
 
 	print("Check the Output file!")	
 		
@@ -124,15 +101,6 @@ def Perceptron(data, output):
 			output.write(str(errors_annealing[e]))
 			output.write("\t")
 		output.write("\n\n")
-
-
-
-	
-	
-	
-	
-
-	
 	
 Perceptron(sys.argv[1], sys.argv[2])
 
